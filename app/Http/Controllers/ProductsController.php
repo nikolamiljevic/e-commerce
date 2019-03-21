@@ -43,4 +43,22 @@ class ProductsController extends Controller
       }
    }
 
+   public function deleteItemFromCart(Request $request, $id){
+
+      $cart = $request->session()->get('cart');
+
+      if(array_key_exists($id,$cart->items)){
+        unset($cart->items[$id]);
+      }
+
+      $prevCart = $request->session()->get('cart');
+      $updatedCart = new Cart($prevCart);
+      $updatedCart->updatePriceAndQuantity();
+
+      $request->session()->put('cart',$updatedCart);
+
+      return redirect()->route('cartproducts');
+
+   }
+
 }

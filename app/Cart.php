@@ -16,6 +16,7 @@ class Cart
     public function __construct($prevCart)
     {
         if($prevCart != null){
+
             $this->items = $prevCart->items;
             $this->totalQuantity = $prevCart->totalQuantity;
             $this->totalPrice = $prevCart->totalPrice;
@@ -57,6 +58,19 @@ class Cart
         $this->totalPrice = $this->totalPrice + $price;
 
 
+    }
+
+    public function updatePriceAndQuantity(){
+        $totalPrice = 0;
+        $totalQuantity = 0;
+
+        foreach($this->items as $item){
+            $totalQuantity = $totalQuantity + $item['quantity'];
+            $totalPrice = $totalPrice + $item['totalSinglePrice'];
+        }
+        
+        $this->totalQuantity = $totalQuantity;
+        $this->totalPrice = $totalPrice;
     }
 
 }
