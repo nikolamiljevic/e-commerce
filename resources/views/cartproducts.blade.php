@@ -26,6 +26,7 @@
                         
             
                             <tr>
+                                {{$userData->name}}
                                 <td class="cart_product">
                         <a href=""><img src="{{Storage::disk('local')->url('product_images/'.$item['data']['image'])}}" alt="" width="100" height="100"></a>
                                 </td>
