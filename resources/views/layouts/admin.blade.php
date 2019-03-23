@@ -49,8 +49,8 @@
         <div class="col-sm-3 col-md-2 sidebar">
             <ul class="nav nav-sidebar">
                <li class="active"><a href="{{route('adminDisplayProducts')}}">Overview <span class="sr-only">(current)</span></a></li>
-                {{-- <li><a href="{{route('adminCreateProductForm')}}">Insert</a></li>
-                <li><a href="{{route('ordersPanel')}}">Orders</a></li> --}}
+                <li><a href="{{route('adminCreateProductForm')}}">Insert</a></li>
+                <li><a href="">Orders</a></li>
                  <li><a href="#">Edit</a></li>
                 <li><a href="#">Users</a></li>
                 <li><a href="#">Analytics</a></li>

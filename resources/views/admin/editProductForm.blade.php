@@ -5,8 +5,8 @@
 {{-- @if(Auth::user()->admin_level == 1)  --}}
 <div class="table-responsive">
 
-    {{-- <form action="{{ route('adminUpdateProduct',['id' => $product->id ])}}" method="post"> --}}
-    <form action="admin/update/{{$product->id}}" method="post">
+    <form action="{{ route('adminUpdateProduct',['id' => $product->id ])}}" method="post">
+  
         {{csrf_field()}}
 
         <div class="form-group">
