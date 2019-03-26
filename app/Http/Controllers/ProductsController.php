@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Product;
 use App\Cart;
 use\Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\DB;
 
 class ProductsController extends Controller
 {
@@ -15,7 +16,22 @@ class ProductsController extends Controller
        return view('allproducts',compact('products'));
    }
 
-   public function addProductToCard(Request $request,$id){
+//display only men products
+    public function menProducts(){
+
+     $products = DB::table('products')->where('type','men')->get();
+     return view('menProducts',compact('products'));
+    }
+
+//display only women products
+    public function womenProducts(){
+      
+      $products = DB::table('products')->where('type','women')->get();
+      return view('womenProducts',compact('products'));
+    }
+
+
+   public function addProductToCart(Request $request,$id){
 
             //session request to see if there is any added items
         $prevCart = $request->session()->get('cart');
@@ -60,5 +76,7 @@ class ProductsController extends Controller
       return redirect()->route('cartproducts');
 
    }
+
+
 
 }

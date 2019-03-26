@@ -14,10 +14,17 @@
 Route::get('/', function () {
     return view('welcome');
 });
-
+//all products
 Route::get('products',['uses'=>'ProductsController@index', 'as'=>'allProducts']);
 
-Route::get('product/addToCard/{id}',['uses'=>'ProductsController@addProductToCard','as'=>'AddToCartProduct']);
+//men products
+Route::get('products/men',['uses'=>'ProductsController@menProducts', 'as'=>'menProducts']);
+
+//women products
+Route::get('products/women',['uses'=>'ProductsController@womenProducts', 'as'=>'womenProducts']);
+
+//add product to cart
+Route::get('product/addToCart/{id}',['uses'=>'ProductsController@addProductToCart','as'=>'AddToCartProduct']);
 
 //show items in cart
 Route::get('cart', ["uses"=>"ProductsController@showCart", "as"=> "cartproducts"]);

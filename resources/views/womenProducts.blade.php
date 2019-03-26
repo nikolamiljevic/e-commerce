@@ -201,7 +201,7 @@
             @endforeach
 
             </div><!--features_items-->
-            {{$products->links()}}
+          
             <div class="category-tab"><!--category-tab-->
                 <div class="col-sm-12">
                     <ul class="nav nav-tabs">
