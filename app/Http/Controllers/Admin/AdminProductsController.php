@@ -19,10 +19,60 @@ class AdminProductsController extends Controller
         return view('admin.displayProducts',['products'=>$products]);
    }
 
-   //create product form
+   //create product form view
    public function createProductForm(){
         return view('admin.createProductForm');
    }
+
+
+
+
+   //create product
+   public function sendCreateProductForm(Request $request){
+
+      $name = $request->input('name');
+      $description = $request->input('description');
+      $type = $request->input('type');
+      $price = $request->input('price');
+
+      //take all from request and make image field required
+      Validator::make($request->all(),['image'=>"required|file|image|mimes:jpg,png,jpeg|max:5000"])->validate();
+
+      //get extension of image
+      $ext = $request->file('image')->getClientOriginalExtension(); //jpg
+            
+      //replacing empty space
+      $stringImageReFormat = str_replace(' ','',$request->input('name'));
+
+      //full image name with extension
+      $imageName = $stringImageReFormat .'.'. $ext;
+
+      //encoding image so we can put it as parameter in storage->put()
+      $imageEncoded = File::get($request->image);
+
+      //put in storage folder
+      Storage::disk('local')->put('public/product_images/'.$imageName,$imageEncoded);
+
+      //make array from input fields
+      $newProductArray = array('name'=>$name,'description'=>$description, 'type'=>$type, 'image'=>$imageName, 'price'=>$price);
+
+      //put it in database
+      $created = DB::table('products')->insert($newProductArray);
+
+      //if created product is successfull then  redirect to page with all products
+      if($created){
+         return redirect()->route('adminDisplayProducts');
+      }else{
+         return "Product was not created";
+      }
+
+
+   }
+
+
+
+
+
 
    //edit product view
    public function editProductForm($id){
@@ -30,13 +80,14 @@ class AdminProductsController extends Controller
       return view('admin.editProductForm',['product'=>$product]);
    }
 
+   //edit product image view
    public function editProductImageForm($id){
       $product = Product::find($id);
       return view('admin.editProductImageForm',['product'=>$product]);
    }
 
-      //update product Image
-      public function updateProductImage(Request $request,$id){
+   //update(edit) product Image
+   public function updateProductImage(Request $request,$id){
 
          Validator::make($request->all(),['image'=>"required|file|image|mimes:jpg,png,jpeg|max:5000"])->validate();
  
@@ -87,6 +138,18 @@ class AdminProductsController extends Controller
          return redirect()->route('adminDisplayProducts');
      }
 
-     
+     //delete image
+     public function deleteProduct($id){
+        
+         $product = Product::find($id);
+         $exists = Storage::disk('local')->exists("public/product_images/".$product->image);
 
+         //delete from storage folder
+         if($exists){
+            Storage::delete('public/product_images/'.$product->image);
+         }
+         Product::destroy($id);
+
+         return redirect()->route('adminDisplayProducts');
+     }
 }

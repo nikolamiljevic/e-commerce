@@ -47,3 +47,9 @@ Route::post('admin/updateProduct/{id}', ["uses"=>"Admin\AdminProductsController@
 
 //display create product form
 Route::get('admin/createProductForm', ["uses"=>"Admin\AdminProductsController@createProductForm", "as"=> "adminCreateProductForm"]);
+
+//create product
+Route::post('admin/sendCreateProductForm', ["uses"=>"Admin\AdminProductsController@sendCreateProductForm", "as"=> "adminSendCreateProductForm"]);
+
+//delete product
+Route::get('admin/deleteProduct/{id}', ["uses"=>"Admin\AdminProductsController@deleteProduct", "as"=> "adminDeleteProduct"]);
