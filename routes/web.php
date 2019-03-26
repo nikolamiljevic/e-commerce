@@ -23,6 +23,9 @@ Route::get('products/men',['uses'=>'ProductsController@menProducts', 'as'=>'menP
 //women products
 Route::get('products/women',['uses'=>'ProductsController@womenProducts', 'as'=>'womenProducts']);
 
+//search
+Route::get('search',['uses'=>'ProductsController@search', 'as'=>'searchProducts']);
+
 //add product to cart
 Route::get('product/addToCart/{id}',['uses'=>'ProductsController@addProductToCart','as'=>'AddToCartProduct']);
 

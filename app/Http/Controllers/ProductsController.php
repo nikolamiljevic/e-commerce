@@ -30,6 +30,15 @@ class ProductsController extends Controller
       return view('womenProducts',compact('products'));
     }
 
+  //search
+    public function search(Request $request){
+     $searchText = $request->get('searchText');
+     //$products = DB::table('products')->where('name','like',$searchText.'%')->get(); this throws an error beacuse of pagination
+
+     //search where name similar to what typed in input field search
+     $products = Product::where('name','Like',$searchText.'%')->paginate(3);
+     return view('allproducts',compact('products'));
+    }
 
    public function addProductToCart(Request $request,$id){
 
