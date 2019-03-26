@@ -50,7 +50,7 @@ class AdminProductsController extends Controller
       //encoding image so we can put it as parameter in storage->put()
       $imageEncoded = File::get($request->image);
 
-      //put in storage folder
+      //put image in storage folder
       Storage::disk('local')->put('public/product_images/'.$imageName,$imageEncoded);
 
       //make array from input fields
