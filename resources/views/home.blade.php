@@ -16,6 +16,13 @@
 
                     <p>Name: {!! Auth::user()->name !!}</p> 
                     <p>Email: {!! Auth::user()->email !!}</p> 
+
+                    <a href="{{ route('allProducts')}}" class="btn btn-primary">Main website</a>
+                    @if($userData->isAdmin())
+                    <a href="{{ route('adminDisplayProducts')}}"  class="btn btn-warning">Admin dashboard</a>
+                    @else 
+                    <div>You are not admin</div>
+                    @endif
                 </div>
             </div>
         </div>
