@@ -33,6 +33,14 @@ Route::get('cart', ["uses"=>"ProductsController@showCart", "as"=> "cartproducts"
 //delete item from cart
 Route::get('product/deleteItemFromCart/{id}',['uses'=>'ProductsController@deleteItemFromCart','as'=>'DeleteItemFromCart']);
 
+
+//increase single product 
+Route::get('product/increaseSingleProduct/{id}',['uses'=>'ProductsController@increaseSingleProduct','as'=>'increaseSingleProduct']);
+
+//decrease single product 
+Route::get('product/decreaseSingleProduct/{id}',['uses'=>'ProductsController@decreaseSingleProduct','as'=>'decreaseSingleProduct']);
+
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
