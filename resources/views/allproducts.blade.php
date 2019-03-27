@@ -57,6 +57,10 @@
 </div><!--/header-bottom-->
 </header><!--/header-->
 
+    <div class="container">
+        @include('alert')
+    </div>
+
 <section id="slider"><!--slider-->
 <div class="container">
     <div class="row">

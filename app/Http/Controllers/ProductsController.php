@@ -125,4 +125,41 @@ class ProductsController extends Controller
     }
 
 
+//create order in cart
+
+    public function createOrder(){
+      $cart = Session::get('cart');
+
+      //cart is not empty
+      if($cart) {
+      // dump($cart);
+          $date = date('Y-m-d H:i:s');
+          $newOrderArray = array("status"=>"on_hold","date"=>$date,"del_date"=>$date,"price"=>$cart->totalPrice);
+          $created_order = DB::table("orders")->insert($newOrderArray);
+          $order_id = DB::getPdo()->lastInsertId();;
+
+
+          foreach ($cart->items as $cart_item){
+              $item_id = $cart_item['data']['id'];
+              $item_name = $cart_item['data']['name'];
+              $item_price = $cart_item['data']['price'];
+              $item_price = str_replace('$','',$item_price);
+              $newItemsInCurrentOrder = array("item_id"=>$item_id,"order_id"=>$order_id,"item_name"=>$item_name,"item_price"=>$item_price);
+              $created_order_items = DB::table("order_items")->insert($newItemsInCurrentOrder);
+          }
+
+          //delete cart
+          Session::forget('cart');
+          Session::flush();
+          return redirect()->route("allProducts")->withsuccess("Thanks For Choosing Us");
+
+      }else{
+
+          return redirect()->route("allProducts");
+
+      }
+
+
+  }
+
 }
