@@ -14,7 +14,7 @@ class AddAdminField extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->boolean('admin')->after('name');
+            $table->boolean('admin')->after('name')->default(1);
             //adding column admin in users table after the name field to check if user is admin in middleware restrictAccess
       
         });

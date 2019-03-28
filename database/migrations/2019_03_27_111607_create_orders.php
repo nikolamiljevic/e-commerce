@@ -19,6 +19,12 @@ class CreateOrders extends Migration
             $table->text('status');
             $table->date('del_date');
             $table->decimal('price',8,2);
+            $table->text('first_name');
+            $table->text('address');
+            $table->text('last_name');
+            $table->integer('phone');
+            $table->integer('zip'); 
+            $table->string('email'); 
         });
     }
 
