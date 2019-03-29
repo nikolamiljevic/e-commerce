@@ -58,6 +58,18 @@ Route::post('product/createNewOrder',['uses'=>'ProductsController@createNewOrder
 
 
 
+//payment page
+Route::get('payment/paymentPage',['uses'=>'Payment\PaymentsController@showPaymentPage','as'=>'showPaymentPage']);
+
+
+
+
+
+
+
+
+
+
 
 //increase single product 
 Route::get('product/increaseSingleProduct/{id}',['uses'=>'ProductsController@increaseSingleProduct','as'=>'increaseSingleProduct']);

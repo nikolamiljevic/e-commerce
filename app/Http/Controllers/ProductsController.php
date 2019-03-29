@@ -226,14 +226,15 @@ class ProductsController extends Controller
 
            //delete cart
            Session::forget("cart");
-           
-          // $payment_info =  $newOrderArray;
-          // $payment_info['order_id'] = $order_id;
-          // $request->session()->put('payment_info',$payment_info);
+           Session::flush();
 
-         print_r($newOrderArray);
+           $payment_info =  $newOrderArray;
+          // $payment_info['order_id'] = $order_id;
+           $request->session()->put('payment_info',$payment_info);
+
+        // print_r($newOrderArray);
            
-       // return redirect()->route("showPaymentPage");
+        return redirect()->route("showPaymentPage");
 
        }else{
 
