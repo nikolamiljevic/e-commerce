@@ -61,7 +61,8 @@ Route::post('product/createNewOrder',['uses'=>'ProductsController@createNewOrder
 //payment page
 Route::get('payment/paymentPage',['uses'=>'Payment\PaymentsController@showPaymentPage','as'=>'showPaymentPage']);
 
-
+//process payment & receipt page
+Route::get('payment/paymentreceipt/{paymentID}/{payerID}', ["uses"=> "Payment\PaymentsController@showPaymentReceipt", 'as'=> 'showPaymentReceipt']);
 
 
 

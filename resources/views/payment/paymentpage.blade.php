@@ -47,14 +47,14 @@
 
 @endsection
 
-{{-- 
+
 <script src="https://www.paypalobjects.com/api/checkout.js"></script>
 <script>
   paypal.Button.render({
     // Configure environment
     env: 'sandbox',
     client: {
-      sandbox: 'YOUR_SANDBOX_CLIENT_ID',
+      sandbox: '',
       production: 'YOUR_PRODUCTION_CLIENT_ID'
     },
     // Customize button (optional)
@@ -84,7 +84,7 @@
       return actions.payment.execute().then(function() {
         // Show a confirmation message to the buyer
         window.alert('Thank you for your purchase!');
-
+    
         window.location = './paymentreceipt/'+data.paymentID+'/'+data.payerID;
 
 
@@ -93,6 +93,6 @@
     }
   }, '#paypal-button');
 
-</script> --}}
+</script> 
 
 
