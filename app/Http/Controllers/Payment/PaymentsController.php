@@ -51,32 +51,25 @@ class PaymentsController extends Controller
            $paypal_payment_id = $paypalPaymentID;
            $paypal_payer_id = $paypalPayerID;
 
-
-       if($status == 'on_hold'){
+        if($status == 'on_hold'){
        
-        //create (issue) a new payment row in payments table
+            //create (issue) a new payment row in payments table
             $date = date('Y-m-d H:i:s');
             $newPaymentArray = array("order_id"=>$order_id,"date"=>$date,"amount"=>$payment_info['price'],
-                "paypal_payment_id"=>$paypal_payment_id, "paypal_payer_id" => $paypal_payer_id);
+            "paypal_payment_id"=>$paypal_payment_id, "paypal_payer_id" => $paypal_payer_id);
 
             $created_order = DB::table("payments")->insert($newPaymentArray);
            
 
-       //update payment status in orders table to "paid"
+            //update payment status in orders table to "paid"
+            DB::table('orders')->where('order_id', $order_id)->update(['status' => 'paid']);
        
-       DB::table('orders')->where('order_id', $order_id)->update(['status' => 'paid']);
-       
-      }
-
-
+        }
 
     }
 
 
-
     public function showPaymentReceipt($paypalPaymentID,$paypalPayerID){
-
-
 
                 if(!empty($paypalPaymentID) && !empty($paypalPayerID)){
                           //will return json -> contains transaction status
@@ -106,8 +99,6 @@ class PaymentsController extends Controller
 
                 }
 
-
-
     }
 
 
@@ -116,8 +107,8 @@ private function validate_payment($paypalPaymentID, $paypalPayerID){
 
      $paypalEnv       = 'sandbox'; // Or 'production'
      $paypalURL       = 'https://api.sandbox.paypal.com/v1/'; //change this to paypal live url when you go live
-     $paypalClientID  = 'Your_Client_id';
-     $paypalSecret   = 'Your_Secret';
+     $paypalClientID  = '';
+     $paypalSecret   = '';
     
 
 
